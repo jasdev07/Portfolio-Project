@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+
+  armas_frontend_nuxt_https:
+    image: nuxt_frontend:https
+    container_name: armas_frontend_nuxt_https
+    build: 
+      context: ./services/armas_frontend_nuxt_https
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ./services/armas_frontend_nuxt_https:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./.env
+
+  armas_backend_fast_https:
+    image: fast_backend:https
+    container_name: armas_backend_fast_https
+    build: 
+      context: ./services/armas_backend_fast_https
+      dockerfile: Dockerfile
+    command: uvicorn src.main:app --reload --host 0.0.0.0 --port 8085
+    volumes:
+      - ./services/armas_backend_fast_https/src:/app/src
+    env_file:
+        - ./.env
+    depends_on: 
+      - armas_frontend_nuxt_https
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_https
+    build: 
+      context: ./services/nginx_https
+    ports:
+      - "7443:7443"
+    volumes:
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - armas_frontend_nuxt_https
+      - armas_backend_fast_https
+
+
+      

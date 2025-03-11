@@ -1,0 +1,8 @@
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- Trust self-signed debug certificate for local development -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

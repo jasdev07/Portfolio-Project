@@ -1,0 +1,24 @@
+/* assets/css/transitions.css */
+/* Define enter and leave transitions for fade-slide */
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: opacity 2s;
+}
+.fade-slide-enter, .fade-slide-leave-to {
+  opacity: 0;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+}
+/* Define final state for leave */
+.fade-slide-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
+
+

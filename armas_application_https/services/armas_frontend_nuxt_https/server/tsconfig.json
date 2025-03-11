@@ -1,0 +1,8 @@
+{
+  "extends": "../.nuxt/tsconfig.server.json",
+  "exclude": [
+    "../tailwind.config.js",
+    "node_modules",
+    "./api/*.js"  // Exclude all JavaScript files in the api directory
+  ]
+}
